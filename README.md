@@ -15,7 +15,7 @@ could not find any existing library for such a purpose, so we ended up writing o
 
 ## Origin
 Wondering what the name comes from? Well, it's "polling", for something executed "lately": so "poll"-"lately", 
-then `pollitely` :smile:
+but being *polite*. Then `pollitely` :smile:
 
 ## Usage
 
@@ -68,6 +68,14 @@ dependencies {
     ...
     implementation "com.gucci:pollitely:0.1.1"
 }    
+```
+
+Please, don't forget configuring `DoubleReceive` feature (see [Caveats](#caveats) section):
+
+```
+install(DoubleReceive) {
+    receiveEntireContent = true
+}
 ```
 
 Then, you can use LongRunning for configuring Routes on your application. Here's an example (see [here](/sample/src/Application.kt)):
@@ -123,6 +131,20 @@ API_CLIENT.interceptors.response.use(async (response) => {
         return response;
 });
 ```
+
+## Caveats
+
+### DoubleReceive Feature
+As we said, this is mostly our internal attempt for supporting long-running tasks execution. What we found is that, in
+order to make it *work*, we need to tweak a little `Ktor` pipeline execution. Specifically, we need to ensure that 
+`applicationCall` is not yet consumed while processing postponed tasks. In order to do so, we're:
+* warming-up the `applicationCall`, forcing request is consumed **before** later task execution
+* configuring `DoubleReceive` feature for the application, ensuring request is **still** available to later task execution
+
+### Incomplete Tests
+One last thing related to automatic tests. We're still not able to fully test the protocol, in particular the asynchronous
+execution (in other words, testing the intermediate `204 No Content` responses). This is probably due to a limitation in 
+the withTestApplication facility from Ktor **server test** library. We'd be more that happy to learn how to do it!
 
 ## License
 
