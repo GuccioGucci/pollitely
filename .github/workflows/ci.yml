@@ -23,3 +23,11 @@ jobs:
 
       - name: Build & test
         run: ./gradlew clean test
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        with:
+          artifact: test-results
+          name: Tests Results
+          path: 'build/test-results/**/*.xml'
+          reporter: java-junit
