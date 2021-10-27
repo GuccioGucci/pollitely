@@ -5,7 +5,7 @@ We've been using this in [GuccioGucci](https://github.com/GuccioGucci) for inter
 few hours. Please, consider this just as a first attempt before setting up a proper distributed and/or 
 scheduled architecture for task execution.
 
-This is also sort of a spike with Kotlin & Ktor, while we're learning the stack. Unfortunately, we 
+This is also sort of a spike with `Kotlin` & `Ktor`, while we're learning the stack. Unfortunately, we 
 could not find any existing library for such a purpose, so we ended up writing our own! 
 
 ## Usage
@@ -39,7 +39,7 @@ const delay = (ms, action) => {
 }
 
 const pollEvery = async (ms, location) => {
-    i("Waiting " + ms + " ms");
+    console.log("Waiting " + ms + " ms");
     await delay(ms);
     const response = await axios.get(location);
 
