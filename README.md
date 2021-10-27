@@ -8,7 +8,8 @@ such as **batch processes**, `politelly` can support making those tasks taking l
 ## Motivation
 We've been using this in [GuccioGucci](https://github.com/GuccioGucci) for internal backoffice tools, 
 on processes that takes up to few hours. Please, consider this just as a first attempt before setting up a proper 
-distributed and/or scheduled architecture for task execution.
+distributed and/or scheduled architecture for task execution. Provided implementation is fully *in-process* and *in-memory*,
+not intended (yet) to be scaled!
 
 This is also sort of a spike with `Kotlin` & `Ktor`, while we're learning the stack. Unfortunately, we 
 could not find any existing library for such a purpose, so we ended up writing our own!
