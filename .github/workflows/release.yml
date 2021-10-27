@@ -1,10 +1,8 @@
 name: ci
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  release:
+    types: [created]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,3 +21,8 @@ jobs:
 
       - name: Build & test
         run: ./gradlew clean test
+
+      - name: Publish
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
