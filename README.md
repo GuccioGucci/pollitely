@@ -23,7 +23,30 @@ for long-running tasks. The protocol itself is the provided as a twofold compone
 In order to use it, you should define both a maven repository and an implementation dependency, on your 
 build.gradle file (or equivalent).
 
-**[TBC: Gradle sample]**
+Here's a sample Gradle build file:
+
+```
+repositories {
+    ...
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/GuccioGucci/pollitely"
+            credentials {
+                username = System.getenv("GITHUB_PACKAGES_USERNAME")
+                password = System.getenv("GITHUB_PACKAGES_PASSWORD")
+            }
+        }
+    }
+}
+
+dependencies {
+    ...
+    implementation "com.gucci:pollitely:0.1.1"
+}    
+```
+
+**[TBC: Configuring Routes]**
 
 ### Frontend
 
