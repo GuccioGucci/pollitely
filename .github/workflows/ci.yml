@@ -25,9 +25,6 @@ jobs:
         run: ./gradlew clean test
 
       - name: Publish test results
-        uses: dorny/test-reporter@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
         with:
-          artifact: test-results
-          name: Tests Results
-          path: 'build/test-results/**/*.xml'
-          reporter: java-junit
+          files: 'build/test-results/**/*.xml'
