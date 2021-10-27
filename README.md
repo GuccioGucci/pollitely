@@ -12,7 +12,7 @@ could not find any existing library for such a purpose, so we ended up writing o
 
 The underlying idea is providing a standard (while simple) protocol for starting and waiting for completion
 for long-running tasks. The protocol itself is the provided as a twofold component:
-* a backed `Ktor facility, for configuring Routes
+* a backed `Ktor` facility, for configuring Routes
 * a frontend `ReactJS` interceptor, for waiting for task completion
 
 **[TBC: protocol, as image]**
