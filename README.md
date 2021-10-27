@@ -1,21 +1,45 @@
 # pollitely
 
-This is a light-weight approach for making long-running HTTP request not to incur in time-out.
-We've been using this in [GuccioGucci](https://github.com/GuccioGucci) for internal backoffice tools, on processes that takes up to
-few hours. Please, consider this just as a first attempt before setting up a proper distributed and/or 
-scheduled architecture for task execution.
+This is a library providing a light-weight approach for executing long-running tasks as simple HTTP request, 
+making them not to incur in HTTP time-out. In other words, given web applications that run task 
+such as **batch processes**, `politelly` can support making those tasks taking longer that usual HTTP timeout 
+(typically few minutes). Reference tech stack is `Kotlin` / `Ktor`.
+
+## Motivation
+We've been using this in [GuccioGucci](https://github.com/GuccioGucci) for internal backoffice tools, 
+on processes that takes up to few hours. Please, consider this just as a first attempt before setting up a proper 
+distributed and/or scheduled architecture for task execution.
 
 This is also sort of a spike with `Kotlin` & `Ktor`, while we're learning the stack. Unfortunately, we 
-could not find any existing library for such a purpose, so we ended up writing our own! 
+could not find any existing library for such a purpose, so we ended up writing our own!
+
+## Origin
+Wondering what the name comes from? Well, it's "polling", for something executed "lately": so "poll"-"lately", 
+then `pollitely` :smile:
 
 ## Usage
 
 The underlying idea is providing a standard (while simple) protocol for starting and waiting for completion
-for long-running tasks. The protocol itself is the provided as a twofold component:
+for long-running tasks. Here it comes:
+```
+> POST /resource HTTP/1.1
+< HTTP/1.1 202 Accepted
+< Location: /resource/1
+
+> GET /resource/1 HTTP/1.1
+< HTTP/1.1 204 No Content
+< Retry-After: 5
+
+... few seconds later ...
+
+> GET /resource/1 HTTP/1.1
+< HTTP/1.1 200 OK
+This is the original task result
+```
+
+The protocol itself is then provided as a twofold component:
 * a backed `Ktor` facility, for configuring Routes
 * a frontend `ReactJS` interceptor, for waiting for task completion
-
-**[TBC: protocol, as image]**
 
 ### Backend
 
@@ -46,7 +70,18 @@ dependencies {
 }    
 ```
 
-**[TBC: Configuring Routes]**
+Then, you can use LongRunning for configuring Routes on your application. Here's an example (see [here](/sample/src/Application.kt)):
+
+```
+routing {
+    route("/api/executions", LongRunning(Ids.Sequential()).with({
+        val name: Any = it.call().request.queryParameters["name"] ?: "Bob"
+        return@with "Hello, $name"
+    }))
+}
+```
+
+More examples are available in [LongRunningTest.kt](lib/test/com/gucci/polling/LongRunningTest.kt).
 
 ### Frontend
 
