@@ -1,7 +1,7 @@
 # pollitely
 
 This is a light-weight approach for making long-running HTTP request not to incur in time-out.
-We've been using this in [GuccioGucci] for internal backoffice tools, on processes that takes up to
+We've been using this in [GuccioGucci](https://github.com/GuccioGucci) for internal backoffice tools, on processes that takes up to
 few hours. Please, consider this just as a first attempt before setting up a proper distributed and/or 
 scheduled architecture for task execution.
 
