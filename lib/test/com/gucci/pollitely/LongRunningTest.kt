@@ -1,4 +1,4 @@
-package com.gucci.polling
+package com.gucci.pollitely
 
 import io.ktor.application.*
 import io.ktor.features.*

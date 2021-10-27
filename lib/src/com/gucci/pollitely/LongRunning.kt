@@ -1,6 +1,5 @@
-package com.gucci.polling
+package com.gucci.pollitely
 
-import com.gucci.polling.LongRunningRequestContext
 import api.util.Exceptions
 import io.ktor.application.*
 import io.ktor.http.*

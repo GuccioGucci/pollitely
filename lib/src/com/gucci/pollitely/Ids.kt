@@ -1,4 +1,4 @@
-package com.gucci.polling
+package com.gucci.pollitely
 
 import java.util.concurrent.atomic.AtomicInteger
 

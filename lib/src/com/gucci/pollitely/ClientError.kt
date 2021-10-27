@@ -1,4 +1,4 @@
-package com.gucci.polling
+package com.gucci.pollitely
 
 // marker interface
 interface ClientError

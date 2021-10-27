@@ -1,7 +1,7 @@
 package com.gucci
 
-import com.gucci.polling.Ids
-import com.gucci.polling.LongRunning
+import com.gucci.pollitely.Ids
+import com.gucci.pollitely.LongRunning
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*

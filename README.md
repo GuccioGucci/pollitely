@@ -81,7 +81,7 @@ routing {
 }
 ```
 
-More examples are available in [LongRunningTest.kt](lib/test/com/gucci/polling/LongRunningTest.kt).
+More examples are available in [LongRunningTest.kt](lib/test/com/gucci/pollitely/LongRunningTest.kt).
 
 ### Frontend
 
