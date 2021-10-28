@@ -17,7 +17,7 @@ This is also sort of a spike with `Kotlin` & `Ktor`, while we're learning the st
 could not find any existing library for such a purpose, so we ended up writing our own!
 
 ## Origin
-Wondering what the name comes from? Well, it's "polling", for something executed "lately": so "poll"-"lately", 
+Wondering where the name comes from? Well, it's "polling", for something executed "lately": so "poll"-"lately", 
 but being *polite*. Then `pollitely` :smile:
 
 ## Usage
