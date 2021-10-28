@@ -21,7 +21,7 @@ jobs:
         run: ./gradlew clean test
 
       - name: Publish
-        run: ./gradlew :lib:publish
+        run: ./gradlew :pollitely-lib:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           

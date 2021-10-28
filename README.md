@@ -69,7 +69,7 @@ repositories {
 
 dependencies {
     ...
-    implementation "com.gucci:pollitely:0.1.1"
+    implementation "com.gucci:pollitely-lib:$VERSION" // choose you preferred version!
 }    
 ```
 
@@ -81,8 +81,8 @@ install(DoubleReceive) {
 }
 ```
 
-Then, you can use [`LongRunning`](lib/src/com/gucci/pollitely/LongRunning.kt) for configuring `Routes` on your application. 
-Here's an example (see [here](/sample/src/Application.kt)):
+Then, you can use [`LongRunning`](pollitely-lib/src/com/gucci/pollitely/LongRunning.kt) for configuring `Routes` on your application. 
+Here's an example (see [here](/pollitely-sample/src/Application.kt)):
 
 ```
 routing {
@@ -93,7 +93,7 @@ routing {
 }
 ```
 
-More examples are available in [`LongRunningTest`](lib/test/com/gucci/pollitely/LongRunningTest.kt).
+More examples are available in [`LongRunningTest`](pollitely-lib/test/com/gucci/pollitely/LongRunningTest.kt).
 
 ### Frontend
 
