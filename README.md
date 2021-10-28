@@ -25,7 +25,7 @@ but being *polite*. Then `pollitely` :smile:
 The underlying idea is providing a standard (while simple) protocol for starting and waiting for completion
 for long-running tasks. Here it comes:
 ```
-> POST /api/executions HTTP/1.1
+> POST /resources HTTP/1.1
 < HTTP/1.1 202 Accepted
 < Location: /resources/1
 
