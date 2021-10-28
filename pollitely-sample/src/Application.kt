@@ -18,7 +18,7 @@ fun Application.module() {
     }
 
     routing {
-        route("/api/executions", LongRunning(Ids.Sequential()).with({
+        route("/api/executions", LongRunning(ids = Ids.Sequential(), every = 5).with({
             delay(10000)
             val name: Any = it.call().request.queryParameters["name"] ?: "Bob"
             return@with "Hello, $name"

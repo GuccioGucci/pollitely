@@ -25,7 +25,7 @@ but being *polite*. Then `pollitely` :smile:
 The underlying idea is providing a standard (while simple) protocol for starting and waiting for completion
 for long-running tasks. Here it comes:
 ```
-> POST /resources HTTP/1.1
+> POST /api/executions HTTP/1.1
 < HTTP/1.1 202 Accepted
 < Location: /resources/1
 
@@ -89,7 +89,8 @@ Here's an example (see [here](/pollitely-sample/src/Application.kt)):
 
 ```
 routing {
-    route("/api/executions", LongRunning(Ids.Sequential()).with({
+    route("/api/executions", LongRunning(ids = Ids.Sequential(), every = 5).with({
+        delay(10000)
         val name: Any = it.call().request.queryParameters["name"] ?: "Bob"
         return@with "Hello, $name"
     }))
