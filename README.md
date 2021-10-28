@@ -25,19 +25,22 @@ but being *polite*. Then `pollitely` :smile:
 The underlying idea is providing a standard (while simple) protocol for starting and waiting for completion
 for long-running tasks. Here it comes:
 ```
-> POST /resource HTTP/1.1
+> POST /resources HTTP/1.1
 < HTTP/1.1 202 Accepted
-< Location: /resource/1
+< Location: /resources/1
 
-> GET /resource/1 HTTP/1.1
+> GET /resources/1 HTTP/1.1
 < HTTP/1.1 204 No Content
 < Retry-After: 5
 
 ... few seconds later ...
 
-> GET /resource/1 HTTP/1.1
+> GET /resources/1 HTTP/1.1
 < HTTP/1.1 200 OK
-This is the original task result
+This is the original task result body
+
+> GET /resources/1 HTTP/1.1
+< HTTP/1.1 404 OK
 ```
 
 The protocol itself is then provided as a twofold component:
