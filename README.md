@@ -7,7 +7,9 @@ such as **batch processes**, `politelly` can support making those tasks taking l
 
 ## Motivation
 We've been using this in [GuccioGucci](https://github.com/GuccioGucci) for internal backoffice tools, 
-on processes that takes up to few hours. Please, consider this just as a first attempt before setting up a proper 
+on processes that takes up to few hours, polling for completion from an SPA, while letting user doing something else. 
+
+Please, consider this just as a first attempt before setting up a proper 
 distributed and/or scheduled architecture for task execution. Provided implementation is fully *in-process* and *in-memory*,
 not intended (yet) to be scaled!
 
@@ -39,7 +41,7 @@ This is the original task result
 ```
 
 The protocol itself is then provided as a twofold component:
-* a backed `Ktor` facility, for configuring Routes
+* a backend `Ktor` facility, for configuring `Routes`
 * a frontend `ReactJS` interceptor, for waiting for task completion
 
 ### Backend
@@ -79,7 +81,8 @@ install(DoubleReceive) {
 }
 ```
 
-Then, you can use LongRunning for configuring Routes on your application. Here's an example (see [here](/sample/src/Application.kt)):
+Then, you can use [`LongRunning`](lib/src/com/gucci/pollitely/LongRunning.kt) for configuring `Routes` on your application. 
+Here's an example (see [here](/sample/src/Application.kt)):
 
 ```
 routing {
@@ -90,7 +93,7 @@ routing {
 }
 ```
 
-More examples are available in [LongRunningTest.kt](lib/test/com/gucci/pollitely/LongRunningTest.kt).
+More examples are available in [`LongRunningTest`](lib/test/com/gucci/pollitely/LongRunningTest.kt).
 
 ### Frontend
 
