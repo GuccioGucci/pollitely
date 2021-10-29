@@ -40,7 +40,7 @@ for long-running tasks. Here it comes:
 This is the original task result body
 
 > GET /resources/1 HTTP/1.1
-< HTTP/1.1 404 OK
+< HTTP/1.1 404 Not Found
 ```
 
 The protocol itself is then provided as a twofold component:
