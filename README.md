@@ -56,7 +56,7 @@ build.gradle file (or equivalent).
 
 Here's a sample Gradle build file:
 
-```kotlin
+```gradle
 repositories {
     ...
     repositories {
