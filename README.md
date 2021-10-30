@@ -45,7 +45,7 @@ This is the original task result body
 ```
 
 The protocol itself is then provided as a twofold component:
-* a backend `Ktor` facility, for configuring `Routes`
+* a backend `Ktor` facility, for configuring `Route`s
 * a frontend `ReactJS` interceptor, for waiting for task completion
 
 ### Backend
@@ -85,7 +85,7 @@ install(DoubleReceive) {
 }
 ```
 
-Then, you can use [`LongRunning`](pollitely-lib/src/com/gucci/pollitely/LongRunning.kt) for configuring `Routes` on your application. 
+Then, you can use [`LongRunning`](pollitely-lib/src/com/gucci/pollitely/LongRunning.kt) for configuring `Route`s on your application. 
 Here's an example (see [here](/pollitely-sample/src/Application.kt)):
 
 ```kotlin
@@ -159,7 +159,7 @@ Please, provide any feedback in case you know how to avoid this trick! Not that 
 ### Incomplete Tests
 One last thing related to automatic tests. We're still not able to fully test the protocol, in particular the asynchronous
 execution (in other words, testing the intermediate `204 No Content` responses). This is probably due to a limitation in 
-the withTestApplication facility from Ktor **server test** library. We'd be more that happy to learn how to do it!
+the [`withTestApplication`](https://ktor.io/docs/testing.html) facility from Ktor **server test** library. We'd be more that happy to learn how to do it!
 
 ## License
 
