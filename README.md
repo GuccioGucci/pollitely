@@ -24,6 +24,7 @@ but being *polite*. Then `pollitely` :smile:
 
 The underlying idea is providing a standard (while simple) protocol for starting and waiting for completion
 for long-running tasks. Here it comes:
+
 ```
 > POST /resources HTTP/1.1
 < HTTP/1.1 202 Accepted
@@ -55,7 +56,7 @@ build.gradle file (or equivalent).
 
 Here's a sample Gradle build file:
 
-```
+```kotlin
 repositories {
     ...
     repositories {
@@ -78,7 +79,7 @@ dependencies {
 
 Please, don't forget configuring `DoubleReceive` feature (see [Caveats](#caveats) section):
 
-```
+```kotlin
 install(DoubleReceive) {
     receiveEntireContent = true
 }
@@ -87,7 +88,7 @@ install(DoubleReceive) {
 Then, you can use [`LongRunning`](pollitely-lib/src/com/gucci/pollitely/LongRunning.kt) for configuring `Routes` on your application. 
 Here's an example (see [here](/pollitely-sample/src/Application.kt)):
 
-```
+```kotlin
 routing {
     route("/api/executions", LongRunning(ids = Ids.Sequential(), every = 5).with({
         delay(10000)
@@ -103,7 +104,7 @@ More examples are available in [`LongRunningTest`](pollitely-lib/test/com/gucci/
 
 Here's a sample snippet for using resources adhering to the protocol:
 
-```
+```js
 import axios from 'axios';
 
 const delay = (ms, action) => {
@@ -131,12 +132,12 @@ const API_CLIENT = axios.create();
 
 API_CLIENT.interceptors.response.use(async (response) => {
     if (response.status === 202) {
-            logger.debug("Interceptor started, location: " + response.headers.location);
-            return await pollEvery(1000, response.headers.location);
-        }
-        
-        logger.debug("Interceptor skipped, status: " + response.status)
-        return response;
+        logger.debug("Interceptor started, location: " + response.headers.location);
+        return await pollEvery(1000, response.headers.location);
+    }
+    
+    logger.debug("Interceptor skipped, status: " + response.status)
+    return response;
 });
 ```
 
@@ -144,10 +145,16 @@ API_CLIENT.interceptors.response.use(async (response) => {
 
 ### DoubleReceive Feature
 As we said, this is mostly our internal attempt for supporting long-running tasks execution. What we found is that, in
-order to make it *work*, we need to tweak a little `Ktor` pipeline execution. Specifically, we need to ensure that 
-`applicationCall` is not yet consumed while processing postponed tasks. In order to do so, we're:
-* warming-up the `applicationCall`, forcing request is consumed **before** later task execution
+order to make it *work*, we need to tweak a little `Ktor` pipeline execution.
+
+That is, under certain *timing* conditions, we found that postponed tasks were not receiving any data from HTTP body 
+(receiving form-data or JSON payload): it seemed like the `applicationCall.request` was already consumed by receiving route handler.
+
+So, we need to ensure that `applicationCall` was not yet consumed while processing postponed tasks. In order to do so, we're:
+* *warming-up* the `applicationCall`, forcing request is consumed **before** later task execution (with `applicationCall.receiveChannel()`)
 * configuring `DoubleReceive` feature for the application, ensuring request is **still** available to later task execution
+
+Please, provide any feedback in case you know how to avoid this trick! Not that is causing any issue, but it really sounds like a *workaround*.
 
 ### Incomplete Tests
 One last thing related to automatic tests. We're still not able to fully test the protocol, in particular the asynchronous
