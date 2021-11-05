@@ -14,7 +14,7 @@ apply plugin: 'signing'
 
 group = 'com.gucci'
 archivesBaseName = "pollitely-lib"
-version = '0.1.5'
+version = '0.1.6-SNAPSHOT'
 
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
