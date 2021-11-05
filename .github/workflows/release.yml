@@ -21,7 +21,7 @@ jobs:
         run: ./gradlew clean test
 
       - name: Publish
-        run: ./gradlew :pollitely-lib:publish
+        run: ./gradlew uploadArchives
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
