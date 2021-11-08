@@ -58,6 +58,33 @@ uploadArchives {
                         password: System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("sonatype.password")
                 )
             }
+
+            pom.project {
+                name 'Pollitely'
+                description 'This is a library providing a light-weight approach for executing long-running tasks as simple HTTP request, making them not to incur in HTTP time-out. In other words, given web applications that run task such as batch processes, politelly can support making those tasks taking longer that usual HTTP timeout (typically few minutes). Reference tech stack is Kotlin / Ktor.'
+                url 'https://github.com/GuccioGucci/pollitely'
+
+                scm {
+                    connection 'scm:git:https://github.com/GuccioGucci/pollitely.git'
+                    developerConnection 'scm:git:https://github.com/GuccioGucci/pollitely.git'
+                    url 'https://github.com/GuccioGucci/pollitely'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU Lesser General Public License v3.0'
+                        url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'guccio-gucci'
+                        name 'Guccio Gucci'
+                        email 'infrastructure-cop@kering.onmicrosoft.com'
+                    }
+                }
+            }
         }
     }
 }
