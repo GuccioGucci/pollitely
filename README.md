@@ -50,27 +50,12 @@ The protocol itself is then provided as a twofold component:
 
 ### Backend
 
-`pollitely` is provided (at the moment) as a standard Maven artifact, available here on Github Package Repository.
-In order to use it, you should define both a maven repository and an implementation dependency, on your 
-build.gradle file (or equivalent).
+`pollitely` is provided (at the moment) as a standard Maven artifact, available fron Maven Central repositories.
+In order to use it, please add an implementation dependency, on your build.gradle file (or equivalent).
 
 Here's a sample Gradle build file:
 
 ```gradle
-repositories {
-    ...
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/GuccioGucci/pollitely"
-            credentials {
-                username = System.getenv("GITHUB_PACKAGES_USERNAME")
-                password = System.getenv("GITHUB_PACKAGES_PASSWORD")
-            }
-        }
-    }
-}
-
 dependencies {
     ...
     implementation "com.gucci:pollitely-lib:$VERSION" // choose you preferred version!
