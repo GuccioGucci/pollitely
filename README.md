@@ -1,5 +1,7 @@
 # pollitely
 
+![ci](https://github.com/GuccioGucci/pollitely/actions/workflows/ci.yml/badge.svg) ![release](https://github.com/GuccioGucci/pollitely/actions/workflows/release.yml/badge.svg)
+
 This is a library providing a light-weight approach for executing long-running tasks as simple HTTP request, 
 making them not to incur in HTTP time-out. In other words, given web applications that run task 
 such as **batch processes**, `politelly` can support making those tasks taking longer that usual HTTP timeout 
